@@ -12,16 +12,19 @@ public class RouteConfig {
 	public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route(r -> r.path("/product/**")
-						.filters(f -> f.addRequestParameter("id", "1")
-								.hystrix(c -> c.setName("hystrix").setFallbackUri("forward:/fallback/product")))
+						.filters(f -> f.hystrix(c -> c.setName("hystrix").setFallbackUri("forward:/fallback/product")))
 						.uri("lb://PRODUCT-SERVICE/")
 						.id("product-service"))
 
 				.route(r -> r.path("/user/**")
-						.filters(f -> f.addRequestParameter("id", "1")
-								.hystrix(c -> c.setName("hystrix").setFallbackUri("forward:/fallback/user")))
+						.filters(f -> f.hystrix(c -> c.setName("hystrix").setFallbackUri("forward:/fallback/user")))
 						.uri("lb://USER-SERVICE/")
 						.id("user-service"))
+
+				.route(r -> r.path("/auth/**")
+						.filters(f -> f.hystrix(c -> c.setName("hystrix").setFallbackUri("forward:/fallback/auth")))
+						.uri("lb://AUTH-SERVICE/")
+						.id("auyh-service"))
 				.build();
 	}
 }

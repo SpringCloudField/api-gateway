@@ -10,11 +10,16 @@ public class HystrixController {
 
 	@GetMapping("/product")
 	public String productServiceFallback() {
-		return "This is a fallback for product service.";
+		return "This is a fallback for product service. Service down.";
 	}
 
 	@GetMapping("/user")
 	public String userServiceFallback() {
-		return "This is a fallback for user service.";
+		return "This is a fallback for user service. Service down.";
+	}
+
+	@GetMapping("/auth")
+	public String authServiceFallback() {
+		return "This is a fallback for auth service. Service down.";
 	}
 }
